@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+<title>PaintApp-JS</title>
+{% block content %}
+<head>
+<script src="/static/saveimage.db.js"></script>
+<script src="/static/script.js"></script>
+<script src="/static/load.js"></script>
+<script src="/static/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<div class="col-sm-3 col-md-1" style="background-color:lavender;">
+</div>
+<div class="col-sm-3 col-md-8" style="background-color:lavender;">
+     <div class="col-sm-1 col-md-11" style="background-color:lavenderblush;">
+     <h1><h1 style="text-align:center;"><font face="Times New Roman" color="red"><u><b>PAINT APPLICATION</u></b></h1><hr><hr><br>
+     </div><br>
+
+<div>
+
+
+
+
+	<canvas width="840" height="350" id="a" style="border:2px solid #33CC33; cursor:crosshair;" onmousemove="moveactions(event)"  onmousedown="setstart(event)" onmouseup="setend(event)"></canvas>
+	<img id="loader" src="static/ajax-loader.gif" width="200px" height="200px" style="display:None;">
+
+
+	
+	</div>
+
+
+
+
+
+
+	<table border=2 bgcolor=white align="center">
+	<td><div onclick = "SetColor('#0000ff');" style ="width:20px;height:20px;background-color:#0000ff"></div><td>
+	<td><div onclick = "SetColor('#009fff');" style ="width:20px;height:20px;background-color:#009fff"></div><td>
+	<td><div onclick = "SetColor('#0fffff');" style ="width:20px;height:20px;background-color:#0fffff"></div><td>
+	<td><div onclick = "SetColor('#bfffff');" style ="width:20px;height:20px;background-color:#bfffff"></div><td>
+	<td><div onclick = "SetColor('#000000');" style ="width:20px;height:20px;background-color:#000000"></div><td>
+	<td><div onclick = "SetColor('#333333');" style ="width:20px;height:20px;background-color:#333333"></div><td>
+	<td><div onclick = "SetColor('#666666');" style ="width:20px;height:20px;background-color:#666666"></div><td>
+	<td><div onclick = "SetColor('#999999');" style ="width:20px;height:20px;background-color:#999999"></div><td>
+	<td><div onclick = "SetColor('#ffcc66');" style ="width:20px;height:20px;background-color:#ffcc66"></div><td>
+	<td><div onclick = "SetColor('#ffcc00');" style ="width:20px;height:20px;background-color:#ffcc00"></div><td>
+	<td><div onclick = "SetColor('#ffff00');" style ="width:20px;height:20px;background-color:#ffff00"></div><td>
+	<td><div onclick = "SetColor('#ffff99');" style ="width:20px;height:20px;background-color:#ffff99"></div><td>
+	<td><div onclick = "SetColor('#003300');" style ="width:20px;height:20px;background-color:#003300"></div><td>
+	<td><div onclick = "SetColor('#555000');" style ="width:20px;height:20px;background-color:#555000"></div><td>
+	<tr>
+	<td><div onclick = "SetColor('#00ff00');" style ="width:20px;height:20px;background-color:#00ff00"></div><td>
+	<td><div onclick = "SetColor('#99ff99');" style ="width:20px;height:20px;background-color:#99ff99"></div><td>
+	<td><div onclick = "SetColor('#f00000');" style ="width:20px;height:20px;background-color:#f00000"></div><td>
+	<td><div onclick = "SetColor('#ff6600');" style ="width:20px;height:20px;background-color:#ff6600"></div><td>
+	<td><div onclick = "SetColor('#ff9933');" style ="width:20px;height:20px;background-color:#ff9933"></div><td>
+	<td><div onclick = "SetColor('#F5DEB3');" style ="width:20px;height:20px;background-color:#F5DEB3"></div><td>
+	<td><div onclick = "SetColor('#330000');" style ="width:20px;height:20px;background-color:#330000"></div><td>
+	<td><div onclick = "SetColor('#663300');" style ="width:20px;height:20px;background-color:#663300"></div><td>
+	<td><div onclick = "SetColor('#cc6600');" style ="width:20px;height:20px;background-color:#cc6600"></div><td>
+	<td><div onclick = "SetColor('#DEB887');" style ="width:20px;height:20px;background-color:#DEB887"></div><td>
+	<td><div onclick = "SetColor('#aa0fff');" style ="width:20px;height:20px;background-color:#aa0fff"></div><td>
+	<td><div onclick = "SetColor('#cc66cc');" style ="width:20px;height:20px;background-color:#cc66cc"></div><td>
+	<td><div onclick = "SetColor('#ff66ff');" style ="width:20px;height:20px;background-color:#ff66ff"></div><td>
+	<td><div onclick = "SetColor('#ff99ff');" style ="width:20px;height:20px;background-color:#ff99ff"></div><td>
+
+	</tr>
+	</table>
+	<body onload="mycan(event)" onkeydown="undoredo(event)">
+	<input type="submit" name="rect" class="btn-small btn-primary" value="rectangle" onclick="settool('rectangle')">
+	<input type="submit" name="filledcircle"  value="filledcircle" class="btn-small btn-primary" onclick="settool('filledcircle')">
+	<input type="submit" name="circle" class="btn-small btn-primary" value="circle" onclick="settool('circle')">
+	<input type="submit" name="fillrect" class="btn-small btn-primary" value="fillrectangle" onclick="settool('fillrectangle')">
+	<input type="submit" name="line" class="btn-small btn-primary" value="line" onclick="settool('line')">
+	<input type="submit" class="btn-small btn-danger" value="clearscreen" onclick="clearscreen()"><br><br>
+	<input type="submit" value="save"  class="btn-small btn-success" onclick="ollist(0)">
+	<input type="text" name="savename" id="savename" onkeyup="suggest(this)" required>
+	<input type="submit" value="saved_items"  class="btn-small btn-success" onclick="savedlist(ol)">
+	<input type="submit" value="load save items"  class="btn-small btn-success" onclick="loaddata(document.getElementById('savename'))">
+	<input type="text" name="savename" id="savename" onkeyup="suggest(this)" required> <span id="suggestion">saved_names</span>
+	<input type="submit" value="json load" onclick="load_json()"/>
+	<br><br><br>
+
+
+	
+</div>
+<div class="col-sm-3 col-md-1" style="background-color:lavender;">
+</div>
+</body>
+
+{% endblock %}
